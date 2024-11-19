@@ -1,21 +1,21 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useAuthStore } from "../store/authUser";
 
 const SignupPage = () => {
-  // const { searchParams } = new URL(document.location);
-  // const emailValue = searchParams.get("email");
+  const { searchParams } = new URL(document.location);
+  const emailValue = searchParams.get("email");
 
-  // const [email, setEmail] = useState(emailValue || "");
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState(emailValue || "");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
-  // const { signup, isSigningUp } = useAuthStore();
+  const { signup, isSigningUp } = useAuthStore();
 
   const handleSignUp = (e) => {
     e.preventDefault();
-    console.log(email, username, password);
-    // signup({ email, username, password });
+    // console.log(email, username, password);
+    signup({ email, username, password });
   };
   return (
     <div className="h-screen w-full hero-bg">
@@ -87,10 +87,9 @@ const SignupPage = () => {
               className="w-full py-2 bg-red-600 text-white font-semibold rounded-md
 							hover:bg-red-700
 						"
-              // disabled={isSigningUp}
+              disabled={isSigningUp}
             >
-              Signup
-              {/* {isSigningUp ? "Loading..." : "Sign Up"} */}
+              {isSigningUp ? "Loading..." : "Sign Up"}
             </button>
           </form>
           <div className="text-center text-gray-400">
